@@ -4,7 +4,8 @@ import random
 
 
 class PimSwitch(BaseSwitch):
-    def __init__ (self, num_input, num_output, num_iteration=4):
+
+    def __init__(self, num_input, num_output, num_iteration=4):
         """num_iteration=0 to run until completion."""
         super().__init__(num_input, num_output)
         self.num_iteration = num_iteration
@@ -13,7 +14,7 @@ class PimSwitch(BaseSwitch):
         matched_inputs, matched_outputs = [], []
         final_decision = {}
         decision_updated = False
-        
+
         # Count of how many matches were made after the first iteration,
         # second iteration, etc.
         self.match_counts = []
@@ -59,6 +60,7 @@ class PimSwitch(BaseSwitch):
 
         return final_decision.items()
 
+
 def main():
     p = PimSwitch(16, 16)
     for i in range(16):
@@ -66,6 +68,7 @@ def main():
             p.receive(Packet(i, j))
 
     print(p.schedule())
-    
+
+
 if __name__ == "__main__":
     main()
