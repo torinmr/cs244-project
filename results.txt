@@ -1,0 +1,35 @@
+Testing convergence of PIM.
+
+Results of experiment with arrival probability 0.1 (100000 trials):
+Iteration 1: 0.8738825409868329
+Iteration 2: 0.9971161344136363
+Iteration 3: 0.9999318336741648
+Iteration 4: 1.0
+
+Results of experiment with arrival probability 0.25 (100000 trials):
+Iteration 1: 0.7556891130122488
+Iteration 2: 0.976049339058292
+Iteration 3: 0.999150960514442
+Iteration 4: 1.0
+
+Results of experiment with arrival probability 0.5 (100000 trials):
+Iteration 1: 0.6870317284795274
+Iteration 2: 0.93418246585985
+Iteration 3: 0.9939715485910077
+Iteration 4: 0.9994920193931471
+Iteration 5: 1.0
+
+Results of experiment with arrival probability 0.75 (100000 trials):
+Iteration 1: 0.6607807738092489
+Iteration 2: 0.9040305632625859
+Iteration 3: 0.9841126316774217
+Iteration 4: 0.9984863809666515
+Iteration 5: 1.0
+
+Results of experiment with arrival probability 1.0 (100000 trials):
+Iteration 1: 0.6437925
+Iteration 2: 0.8816675
+Iteration 3: 0.9718010691242325
+Iteration 4: 0.9971570940857516
+Iteration 5: 0.9997913188647746
+Iteration 6: 1.0
