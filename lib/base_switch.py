@@ -1,7 +1,9 @@
-import queue
+import collections
+
 
 class BaseSwitch:
-    def __init__ (self, num_input, num_output):
+
+    def __init__(self, num_input, num_output):
         self.num_input = num_input
         self.num_output = num_output
         self.current_time = 0
@@ -12,13 +14,14 @@ class BaseSwitch:
 
         for i in range(self.num_input):
             for j in range(self.num_output):
-                self.input_to_output_queue[(i, j)] = queue.Queue()
+                self.input_to_output_queue[(i, j)] = collections.deque()
 
     def receive(self, packet):
         assert 0 <= packet.input_port < self.num_input
         assert 0 <= packet.output_port < self.num_output
 
-        self.input_to_output_queue[(packet.input_port, packet.output_port)].put(packet)
+        self.input_to_output_queue[(packet.input_port,
+                                    packet.output_port)].append(packet)
         packet.received_packet(self.current_time)
 
     # returns list of (input, output) pairs you want to pop
@@ -34,8 +37,14 @@ class BaseSwitch:
         assert len(inputs) == len(outputs) == len(queues_to_pop)
 
         for input, output in queues_to_pop:
-            processed_packet = self.input_to_output_queue[(input, output)].get()
-            processed_packet.time_in_queue = self.current_time - self.time_arrive
+            processed_packet = self.input_to_output_queue[(input,
+                                                           output)].popleft()
+            processed_packet.time_in_queue = self.current_time - processed_packet.time_arrive
 
         self.current_time += 1
 
+    def get_outstanding_packet(self, input, output):
+        if len(self.input_to_output_queue[(input, output)]) == 0:
+            raise Exception("Requesting Packet From Empty Queue")
+
+        return self.input_to_output_queue[(input, output)][0]

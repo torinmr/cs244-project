@@ -2,8 +2,10 @@ from base_switch import BaseSwitch
 from packet import Packet
 import random
 
+
 class PimSwitch(BaseSwitch):
-    def __init__ (self, num_input, num_output, num_iteration=4):
+
+    def __init__(self, num_input, num_output, num_iteration=4):
         super().__init__(num_input, num_output)
         self.num_iteration = num_iteration
 
@@ -18,7 +20,7 @@ class PimSwitch(BaseSwitch):
                 if input in matched_inputs:
                     continue
                 for output in range(self.num_output):
-                    if not self.input_to_output_queue[(input, output)].empty():
+                    if len(self.input_to_output_queue[(input, output)]) != 0:
                         received_requests[output].append(input)
 
             # Step 2: Choose one of the request.
@@ -28,8 +30,8 @@ class PimSwitch(BaseSwitch):
                     continue
                 if len(received_requests[output]) > 0:
                     chosen_input = random.choice(received_requests[output])
-                    reqs_to_inputs[chosen_input] = reqs_to_inputs.get(chosen_input, []) + [output]
-            
+                    reqs_to_inputs[chosen_input] = reqs_to_inputs.get(
+                        chosen_input, []) + [output]
             current_decision = {}
             # Step 3: Input chooses one of the output queue
             for input in reqs_to_inputs:
@@ -43,6 +45,7 @@ class PimSwitch(BaseSwitch):
             run_pim_once()
 
         return final_decision.items()
+
 
 p = PimSwitch(16, 16)
 for i in range(16):
