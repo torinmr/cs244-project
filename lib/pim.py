@@ -38,7 +38,6 @@ class PimSwitch(BaseSwitch):
                     chosen_input = random.choice(received_requests[output])
                     reqs_to_inputs[chosen_input] = reqs_to_inputs.get(
                         chosen_input, []) + [output]
-            current_decision = {}
 
             # Step 3: Input chooses one of the output queue
             for input in reqs_to_inputs:
