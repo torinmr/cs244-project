@@ -1,5 +1,5 @@
-from base_switch import BaseSwitch
-from packet import Packet
+from lib.base_switch import BaseSwitch
+from lib.packet import Packet
 import random
 import numpy as np
 

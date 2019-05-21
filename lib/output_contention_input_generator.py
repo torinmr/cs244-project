@@ -36,9 +36,7 @@ class OutputContentionInputGenerator(BaseInputGenerator):
             assert num_contending_inputs > 0
             assert num_contending_inputs <= self.switch.num_input
             self.input_ports = random.sample(range(self.switch.num_input), num_contending_inputs)
-            
-        print("Output port: {}, input ports: {}".format(self.output_port, self.input_ports))
-        
+
     def generate_packets(self, unused_step):
         for i in self.input_ports:
             if random.random() < self.load_per_input:
