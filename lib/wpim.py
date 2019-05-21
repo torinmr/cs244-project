@@ -29,10 +29,8 @@ class WPimSwitch(BaseSwitch):
         def remove_masked_elements(reqs, output):
             masked_reqs = []
             for input in reqs:
-                if self.sent_credits[
-                        input][output] + self.get_outstanding_packet(
-                            input,
-                            output).packet_size <= self.credit[input][output]:
+                if self.sent_credits[input][output] + self.get_outstanding_packet(input, output).packet_size <= \
+                    self.credit[input][output]:
                     masked_reqs.append(input)
             return masked_reqs
 
@@ -51,13 +49,12 @@ class WPimSwitch(BaseSwitch):
                 if output in matched_outputs:
                     continue
                 if len(received_requests[output]) > 0:
-                    # Mask
-                    masked_reqs = remove_masked_elements(
-                        received_requests[output], output)
+                    # Mask the input ports that already exceeded their given bandwidth
+                    masked_reqs = remove_masked_elements(received_requests[output], output)
+
                     if len(masked_reqs) > 0:
                         chosen_input = random.choice(masked_reqs)
-                        reqs_to_inputs[chosen_input] = reqs_to_inputs.get(
-                            chosen_input, []) + [output]
+                        reqs_to_inputs[chosen_input] = reqs_to_inputs.get(chosen_input, []) + [output]
 
             # Step 3: Input chooses one of the output queue
             for input in reqs_to_inputs:
@@ -68,8 +65,7 @@ class WPimSwitch(BaseSwitch):
                 final_decision[input] = output
 
                 # Increate the sent credits.
-                self.sent_credits[input][output] += self.get_outstanding_packet(
-                    input, output).packet_size
+                self.sent_credits[input][output] += self.get_outstanding_packet(input, output).packet_size
 
         for _ in range(self.num_iteration):
             run_wpim_once()
