@@ -19,14 +19,13 @@ class BaseSwitch:
     def receive(self, packet):
         assert 0 <= packet.input_port < self.num_input
         assert 0 <= packet.output_port < self.num_output
-
         self.input_to_output_queue[(packet.input_port,
                                     packet.output_port)].append(packet)
         packet.received_packet(self.current_time)
 
     # returns list of (input, output) pairs you want to pop
     def schedule(self):
-        raise NotImplementedError
+        raise NotImplementedError()
 
     # Schedule packets per step.
     def step(self):
