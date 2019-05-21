@@ -19,6 +19,7 @@ class BaseSwitch:
 
         # keep track of the number of packets that is forwarded in input->output port
         self.input_output_cnt = np.zeros((self.num_input, self.num_output))
+        self.processed_packets = []
 
     def receive(self, packet):
         assert 0 <= packet.input_port < self.num_input
@@ -44,6 +45,8 @@ class BaseSwitch:
                                                            output)].popleft()
             processed_packet.time_in_queue = self.current_time - processed_packet.time_arrive
             self.input_output_cnt[input][output] += 1
+
+            self.processed_packets.append(processed_packet)
 
         self.current_time += 1
 
