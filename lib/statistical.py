@@ -68,13 +68,3 @@ class StatisticalSwitch(BaseSwitch):
             run_wpim_once()
 
         return final_decision.items()
-
-
-credit = np.array([[10, 0, 0, 0], [20, 0, 0, 0], [30, 0, 0, 0], [40, 0, 0, 0]])
-p = StatisticalSwitch(4, 4, credit)
-for i in range(4):
-    for _ in range(100):
-        p.receive(Packet(i, 0))
-
-for _ in range(100):
-    print(p.schedule())

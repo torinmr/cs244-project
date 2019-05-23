@@ -76,18 +76,3 @@ class WPimSwitch(BaseSwitch):
             self.sent_credits = np.zeros(self.credit.shape)
 
         return final_decision.items()
-
-
-credit = np.array([[0, 1, 2, 3], [1, 2, 3, 0], [2, 3, 0, 1], [3, 0, 1, 2]])
-p = WPimSwitch(4, 4, credit, 6, 4)
-for i in range(4):
-    for j in range(4):
-        for _ in range(10):
-            p.receive(Packet(i, j))
-
-print(p.schedule())
-print(p.schedule())
-print(p.schedule())
-print(p.schedule())
-print(p.schedule())
-print(p.schedule())
