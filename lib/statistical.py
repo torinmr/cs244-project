@@ -10,7 +10,8 @@ class StatisticalSwitch(BaseSwitch):
                  num_input,
                  num_output,
                  credit: np.ndarray,
-                 num_iteration=4):
+                 frame_length=1000,
+                 num_iteration=1):
         super().__init__(num_input, num_output)
         self.num_iteration = num_iteration
 
@@ -23,6 +24,8 @@ class StatisticalSwitch(BaseSwitch):
             for output in range(num_output):
                 self.prob_matrix[input][output] = self.credit[input][output] / output_sum[output]
 
+        self.X = frame_length
+
     def schedule(self):
         matched_inputs, matched_outputs = [], []
         final_decision = {}
@@ -34,6 +37,37 @@ class StatisticalSwitch(BaseSwitch):
             probs = probs / np.sum(probs)
             return probs
 
+        def run_wpim_once():
+            # Step 1: Output queues send request to input queues
+            input_reqs = [list() for _ in range(self.num_input)]
+            for output in range(self.num_output):
+                choice = np.random.choice(list(range(self.num_input)),
+                                          p=self.prob_matrix[:, output])
+                input_reqs[choice].append(output)
+
+            # Step 2. Interpret each grant as random number
+            for input in range(self.num_input):
+                if len(input_reqs[input]) == 0:
+                    continue
+                virtual_grants = []  # virtual grant
+                for output in input_reqs[input]:
+                    vg = np.random.binomial(n=self.credit[input][output], p=(1 / self.X)) * (
+                            self.X / self.credit[input][output])
+                    virtual_grants.append(vg)
+
+                if np.sum(virtual_grants) == 0:
+                    virtual_grants = [1/len(virtual_grants) for _ in range(len(virtual_grants))]
+
+                else:
+                    virtual_grants = virtual_grants / np.sum(virtual_grants)
+
+                # Now chooses what to grant
+                chosen_output = np.random.choice(input_reqs[input], p=virtual_grants)
+                if len(self.input_to_output_queue[(input, chosen_output)]) >= 1:
+                    final_decision[input] = chosen_output
+
+
+        '''
         def run_wpim_once():
             # Step 1: Send requests to output queues.
             received_requests = [[] for _ in range(self.num_output)]
@@ -63,8 +97,25 @@ class StatisticalSwitch(BaseSwitch):
                 matched_outputs.append(output)
 
                 final_decision[input] = output
+        '''
 
         for _ in range(self.num_iteration):
             run_wpim_once()
 
         return final_decision.items()
+
+
+if __name__ == "__main__":
+    credit = np.array([[0, 1, 2, 3], [1, 2, 3, 0], [2, 3, 0, 1], [3, 0, 1, 2]])
+    p = StatisticalSwitch(4, 4, credit, 6, 1)
+    for i in range(4):
+        for j in range(4):
+            for _ in range(10):
+                p.receive(Packet(i, j))
+
+    print(p.schedule())
+    print(p.schedule())
+    print(p.schedule())
+    print(p.schedule())
+    print(p.schedule())
+    print(p.schedule())
