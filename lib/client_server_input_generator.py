@@ -34,6 +34,16 @@ class ClientServerInputGenerator(BaseInputGenerator):
         self.Y = Y
         self.servers = list(range(S))
         self.clients = list(range(S, S+C))
+
+        self.servers_except_me = {}
+        for i in self.servers:
+            servers = [j for j in self.servers if j != i]
+            self.servers_except_me[i] = servers
+
+        self.clients_except_me = {}
+        for i in self.clients:
+            clients = [j for j in self.clients if j != i]
+            self.clients_except_me[i] = clients
         
     def generate_packets(self, unused_step):
         for i in self.servers:
@@ -41,7 +51,7 @@ class ClientServerInputGenerator(BaseInputGenerator):
                 if random.random() < self.Y:
                     j = random.choice(self.clients)
                 else:
-                    j = random.choice(self.servers)
+                    j = random.choice(self.servers_except_me[i])
                 self.switch.receive(Packet(i, j))
                 
         for i in self.clients:
@@ -49,5 +59,5 @@ class ClientServerInputGenerator(BaseInputGenerator):
                 if random.random() < self.X * self.S:
                     j = random.choice(self.servers)
                 else:
-                    j = random.choice(self.clients)
+                    j = random.choice(self.clients_except_me[i])
                 self.switch.receive(Packet(i, j))
