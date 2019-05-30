@@ -1,16 +1,22 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from typing import List, AnyStr
+from matplotlib.ticker import MultipleLocator
 
 
 # y is a 2d array of shape (num_line, len(x))
-def draw_plot(x, y: np.ndarray, legends: List[AnyStr], ylim=None, figure_index=0, scale=None):
+def draw_plot(x, y: np.ndarray, legends: List[AnyStr], ylim=None, figure_index=0, scale=None, spacing=None):
     assert y.shape[1] == len(x)
     assert len(legends) == y.shape[0]
 
     plt.figure(figure_index)
     for i in range(y.shape[0]):
-        plt.plot(x, y[i])
+        plt.plot(x, y[i], 'o')
+
+    if spacing:
+        minorLocator = MultipleLocator(spacing)
+        plt.axes().yaxis.set_minor_locator(minorLocator)
+        plt.axes().grid(which='minor')
 
     if ylim is not None:
         axes = plt.axes()
