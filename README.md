@@ -6,10 +6,12 @@ Torin Rudeen (torinmr@stanford.edu)
 
 Reproduction instructions:
 0. Make sure prerequisites are installed on your system:
-   * Python 3
+   * python3.6-dev (sudo apt-get install python3.6-dev)
    * Pip
 1. Create and activate a virtual environment:
-   * $ python3 - m venv env
+   * $ python3 -m venv env
+      * On some systems you may need to install python3-venv first:
+        $ sudo apt-get install python3-venv
    * $ source env/bin/activate
 2. Install requirements:
    * $ pip install -r requirements.txt
