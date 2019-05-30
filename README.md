@@ -4,5 +4,18 @@ Collaborators:
 Jaebum Lee (jblee94@stanford.edu)
 Torin Rudeen (torinmr@stanford.edu)
 
-File structure:
-* lib: Python libraries.
+Reproduction instructions:
+0. Make sure prerequisites are installed on your system:
+   * Python 3
+   * Pip
+1. Create and activate a virtual environment:
+   * $ python3 - m venv env
+   * $ source env/bin/activate
+2. Install requirements:
+   * $ pip install -r requirements.txt
+3. Launch the Jupiter notebook. All of the figures and results can be
+   reproduced by running the notebook:
+   * $ jupyter notebook
+   * In the browser tab that opens, click on Results.ipynb
+4. Exit the virtual environment:
+   * $ deactivate
