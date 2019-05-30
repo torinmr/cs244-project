@@ -38,8 +38,7 @@ class BaseSwitch:
         inputs = set(input for input, _ in queues_to_pop)
         outputs = set(output for _, output in queues_to_pop)
 
-        assert len(inputs) == len(outputs) == len(queues_to_pop)
-
+        #assert len(inputs) == len(outputs) == len(queues_to_pop)
         for input, output in queues_to_pop:
             processed_packet = self.input_to_output_queue[(input,
                                                            output)].popleft()
