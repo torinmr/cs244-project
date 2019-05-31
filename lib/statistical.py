@@ -131,8 +131,10 @@ class StatisticalSwitch(BaseSwitch):
         for _ in range(self.num_iteration):
             run_wpim_once()
 
+        '''
         for _ in range(self.num_iteration):
             run_pim_once()
+        '''
 
         return final_decision.items()
 

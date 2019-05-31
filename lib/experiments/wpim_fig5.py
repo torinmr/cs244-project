@@ -47,4 +47,4 @@ for num_iter in range(1, 5):
         delay_per_load[num_iter - 1][l] = average_delay
 
 print(delay_per_load)
-draw_plot(loads, delay_per_load, [str(i) + " iterations" for i in range(1, 5)], scale="log")
+draw_plot(loads, delay_per_load, [str(i) + " iterations" for i in range(1, 5)], scale="log", title="Fig 5 (no pim)", xlabel="Average delay", ylabel="Total offered load")

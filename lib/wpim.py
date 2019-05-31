@@ -97,8 +97,10 @@ class WPimSwitch(BaseSwitch):
         for _ in range(self.num_iteration):
             run_wpim_once()
 
+        '''
         for _ in range(self.num_iteration):
             run_pim_once()
+        '''
 
         self.frame_time += 1
         if self.frame_time >= self.frame_length:

@@ -13,7 +13,7 @@ data = [np.zeros((4, len(loads))) for _ in range(3)]
 total_run = 10000
 
 for l, load in enumerate(loads):
-    switches = [PimSwitch(4, 4), StatisticalSwitch(4, 1, credit_stat, 10), WPimSwitch(4, 4, credit, frame_length=1000)]
+    switches = [ WPimSwitch(4, 4, credit, frame_length=1000), PimSwitch(4, 4), StatisticalSwitch(4, 1, credit_stat, 10)]
     for i, switch in enumerate(switches):
         gen = OutputContentionInputGenerator(switch, load, 4, 0, [0, 1, 2, 3])
         gen.run(total_run)
@@ -24,5 +24,7 @@ for l, load in enumerate(loads):
         for j in range(4):
             data[i][j][l] = normalized_bandwidth[j]
 
+cs = ['a', 'b', 'c']
 for i, d in enumerate(data):
-    draw_plot(loads, d, [str(i) for i in range(4)], ylim=[0, 1], figure_index=i, spacing=0.1)
+    draw_plot(loads, d, [str((j + 1) * 10) + "%" for j in range(4)], ylim=[0, 1], figure_index=i, spacing=0.1,
+              title="Figure of 6 (" + cs[i] + "; No PIM)")

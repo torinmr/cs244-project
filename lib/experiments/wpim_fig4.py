@@ -47,4 +47,4 @@ for l, load in enumerate(tqdm(loads)):
         delay_per_load[i][l] = average_delay
 
 print(delay_per_load)
-draw_plot(loads, delay_per_load, ["Statistical", "WPIM"], scale="log")
+draw_plot(loads, delay_per_load, ["Statistical", "WPIM"], scale="log", xlabel="Total offered load", ylabel="Average delay")
