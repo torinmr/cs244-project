@@ -98,11 +98,11 @@ class StatisticalSwitch(BaseSwitch):
                 final_decision[input] = output
 
         for _ in range(self.num_iteration):
-            run_wpim_once()
+            run_sm_once()
 
         if self.run_pim_after_sm:
             for _ in range(self.num_iteration):
-                run_sm_once()
+                run_pim_once()
 
         return final_decision.items()
 
