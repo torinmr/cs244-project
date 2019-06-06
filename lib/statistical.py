@@ -101,16 +101,9 @@ class StatisticalSwitch(BaseSwitch):
         for _ in range(self.num_iteration):
             run_sm_once()
 
-<<<<<<< HEAD
         if self.run_pim_after:
             for _ in range(self.num_iteration):
                 run_pim_once()
-
-=======
-        if self.run_pim_after_sm:
-            for _ in range(self.num_iteration):
-                run_pim_once()
->>>>>>> 83e7aaa1901ab65afb901e09af6c148d88c3dee3
 
         return final_decision.items()
 
