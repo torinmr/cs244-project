@@ -1,0 +1,42 @@
+
+\subsection{Old stuff}
+We reproduced the figure 4, 5, 6 of \cite{stiliadis} as shown in Figure~\ref{fig:4-stil}, ~\ref{fig:5-stil} and ~\ref{fig:6-stil}. All of the figures closely followed the figures described in ~\cite{stiliadis}. Because the paper did not mention how many packets they sent for the experiment, we set it to send 20,000 packets in total. 
+
+One point to mention is that for Figure ~\ref{fig:5-stil}, on high load factor, the delay of WPIM is off by a factor of 2 compared to the result in ~\cite{stiliadis}. This may be because the paper used the different number of packets for its experiment. Since the delay keeps increasing in a high load, the number of packets we test have a huge impact on the total average packet delay. Nevertheless, our reproduced result followed the similar trend. 
+
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/wpim_fig4_1.png}
+    \caption{Figure 4 of \cite{stiliadis}}
+    \label{fig:4-stil}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/wpim_fig5.png}
+    \caption{Figure 5 of \cite{stiliadis}}
+    \label{fig:5-stil}
+\end{figure}
+
+\begin{figure*}
+    \centering
+    \minipage{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/wpim_fig6(a).png}\\
+        (a)
+    \endminipage\hfill
+    \minipage{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/wpim_fig6(b).png}\\
+        (b)
+    \endminipage\hfill
+    \minipage{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/wpim_fig6(c).png}\\
+        (c)
+    \endminipage
+    \caption{Figure 6 of \cite{stiliadis}}
+    \label{fig:6-stil}
+\end{figure*}

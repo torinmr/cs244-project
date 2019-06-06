@@ -2,6 +2,7 @@ from lib.base_switch import BaseSwitch
 from lib.packet import Packet
 import random
 import numpy as np
+from scipy.stats import binom
 
 
 class StatisticalSwitch(BaseSwitch):
@@ -11,7 +12,7 @@ class StatisticalSwitch(BaseSwitch):
                  num_output,
                  credit: np.ndarray,
                  frame_length=1000,
-                 num_iteration=1,
+                 num_iteration=2,
                  run_pim_after=False):
 
         super().__init__(num_input, num_output)
@@ -20,25 +21,25 @@ class StatisticalSwitch(BaseSwitch):
         self.credit = credit
         assert credit.shape == (num_input, num_output)
 
-        self.prob_matrix = np.zeros(credit.shape)
-        output_sum = np.sum(credit, axis=0)
-        for input in range(num_input):
-            for output in range(num_output):
-                self.prob_matrix[input][output] = self.credit[input][output] / output_sum[output]
-
+        self.prob_matrix = self.credit / np.sum(self.credit, axis=0, keepdims=True)
+        
         self.X = frame_length
+        self.vg_prob_matrix = np.zeros((num_input, num_output, np.max(self.credit)+1))
+        for i in range(num_input):
+            for j in range(num_output):
+                credits = self.credit[i][j]
+                if credits < 1:
+                    continue
+                probs = binom.pmf(range(credits+1), credits, 1 / self.X) * self.X / credits
+                probs[0] = 0
+                probs[0] = 1 - sum(probs)
+                self.vg_prob_matrix[i][j][:len(probs)] = probs
+
         self.run_pim_after = run_pim_after
 
     def schedule(self):
         matched_inputs, matched_outputs = [], []
         final_decision = {}
-
-        def normalize_prob_matrix(reqs, output):
-            probs = []
-            for input in reqs:
-                probs.append(self.prob_matrix[input][output])
-            probs = probs / np.sum(probs)
-            return probs
 
         def run_sm_once():
             # Step 1: Output queues send request to input queues
@@ -52,21 +53,23 @@ class StatisticalSwitch(BaseSwitch):
             for input in range(self.num_input):
                 if len(input_reqs[input]) == 0:
                     continue
+                if input in matched_inputs:
+                    continue
                 virtual_grants = []  # virtual grant
                 for output in input_reqs[input]:
-                    vg = np.random.binomial(n=self.credit[input][output], p=(1 / self.X)) * (
-                            self.X / self.credit[input][output])
+                    credit = self.credit[input][output]
+                    vg = np.random.choice(range(credit+1), p=self.vg_prob_matrix[input][output][:credit+1])
                     virtual_grants.append(vg)
 
                 if np.sum(virtual_grants) == 0:
-                    virtual_grants = [1/len(virtual_grants) for _ in range(len(virtual_grants))]
+                    continue
 
-                else:
-                    virtual_grants = virtual_grants / np.sum(virtual_grants)
+                virtual_grants = virtual_grants / np.sum(virtual_grants)
 
                 # Now chooses what to grant
                 chosen_output = np.random.choice(input_reqs[input], p=virtual_grants)
-                if len(self.input_to_output_queue[(input, chosen_output)]) >= 1:
+                if (len(self.input_to_output_queue[(input, chosen_output)]) >= 1
+                    and chosen_output not in matched_outputs):
                     matched_inputs.append(input)
                     matched_outputs.append(chosen_output)
                     final_decision[input] = chosen_output

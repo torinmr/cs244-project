@@ -18,7 +18,7 @@ def draw_plot(x, y: np.ndarray, legends: List[AnyStr], ylim=None, figure_index=0
         minorLocator = MultipleLocator(spacing)
         plt.axes().yaxis.set_minor_locator(minorLocator)
         plt.axes().xaxis.set_minor_locator(minorLocator)
-        plt.axes().grid(which='minor')
+        plt.axes().grid(which='both', axis='both')
 
     if ylim is not None:
         axes = plt.axes()

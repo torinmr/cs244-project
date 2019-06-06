@@ -18,6 +18,6 @@ Reproduction instructions:
 3. Launch the Jupiter notebook. All of the figures and results can be
    reproduced by running the notebook:
    * $ jupyter notebook
-   * In the browser tab that opens, click on Results.ipynb
+   * In the browser tab that opens, click on Reproduction.ipynb
 4. Exit the virtual environment:
    * $ deactivate

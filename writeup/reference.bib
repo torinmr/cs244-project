@@ -1,0 +1,98 @@
+@article{anderson,
+  title={High-speed switch scheduling for local-area networks},
+  author={Anderson, Thomas E and Owicki, Susan S and Saxe, James B and Thacker, Charles P},
+  journal={ACM Transactions on Computer Systems (TOCS)},
+  volume={11},
+  number={4},
+  pages={319--352},
+  year={1993},
+  publisher={ACM}
+}
+
+@article{chang,
+title = "Load balanced Birkhoff–von Neumann switches, part I: one-stage buffering",
+journal = "Computer Communications",
+volume = "25",
+number = "6",
+pages = "611 - 622",
+year = "2002",
+issn = "0140-3664",
+doi = "https://doi.org/10.1016/S0140-3664(01)00427-3",
+url = "http://www.sciencedirect.com/science/article/pii/S0140366401004273",
+author = "Cheng-Shang Chang and Duan-Shin Lee and Yi-Shean Jou",
+keywords = "Input-buffered switches, Load balancing, Scheduling, Stability, Performance analysis",
+abstract = "Motivated by the need for a simple and high performance switch architecture that scales up with the speed of fiber optics, we propose a switch architecture with two-stage switching fabrics and one-stage buffering. The first stage performs load balancing, while the second stage is a Birkhoff–von Neumann input-buffered switch that performs switching for load balanced traffic. Such a switch is called the load balanced Birkhoff–von Neumann switch in this paper. The on-line complexity of the switch is O(1). It is shown that under a mild technical condition on the input traffic, the load balanced Birkhoff–von Neumann switch achieves 100% throughput as an output-buffered switch for both unicast and multicast traffic with fan-out splitting. When input traffic is bursty, we show that load balancing is very effective in reducing delay, and the average delay of the load balanced Birkhoff–von Neumann switch is proven to converge to that of an output-buffered switch under heavy load. Also, by simulations, we demonstrate that load balancing is more effective than the conflict resolution algorithm, i-SLIP, in heavy load. When both the load balanced Birkhoff–von Neumann switch and the corresponding output-buffered switch are allocated with the same finite amount of buffer at each port, we also show that the packet loss probability in the load balanced Birkhoff–von Neumann switch is much smaller than that in an output-buffered switch, when the buffer is large."
+}
+
+@ARTICLE{nan, 
+author={ {Nan Ni} and L. N. {Bhuyan}}, 
+journal={IEEE Transactions on Computers}, 
+title={Fair scheduling in Internet routers}, 
+year={2002}, 
+volume={51}, 
+number={6}, 
+pages={686-701}, 
+keywords={bandwidth allocation;resource allocation;quality of service;Internet;telecommunication network routing;telecommunication switching;scheduling;buffer storage;telecommunication congestion control;telecommunication traffic;input buffered switch architecture;Internet routers;fair scheduling;quality of service;resource allocation;iterative fair scheduling scheme;fair bandwidth distribution;synthetic workload;Web traces;simulation;network traffic;buffer management mechanisms;bandwidth allocation;early packet discard;congestion;per-flow based buffering;bandwidth reservation;Switches;Bandwidth;Web and internet services;Quality of service;Resource management;Throughput;Telecommunication traffic;Traffic control;Channel allocation;Protection}, 
+doi={10.1109/TC.2002.1009152}, 
+ISSN={0018-9340}, 
+month={June},}
+
+@ARTICLE{nong, 
+author={G. {Nong} and M. {Hamdi}}, 
+journal={IEEE Communications Magazine}, 
+title={On the provision of quality-of-service guarantees for input queued switches}, 
+year={2000}, 
+volume={38}, 
+number={12}, 
+pages={62-69}, 
+keywords={queueing theory;packet switching;quality of service;quality-of-service guarantees;QoS guarantees;input queued switches;Internet;input-queued switching architectures;scalable switches;ATM/IP switches/routers;scheduling algorithms design;slot time assignment;maximal matching;stable matching;fast packet switches;parallel iterative matching;Quality of service;Switches;Scheduling algorithm;Packet switching;Communication switching;Web and internet services;Asynchronous transfer mode;Algorithm design and analysis;Scalability;Fabrics}, 
+doi={10.1109/35.888259}, 
+ISSN={0163-6804}, 
+month={Dec},}
+
+@article{PAN2009939,
+title = "Bandwidth guaranteed multicast scheduling for virtual output queued packet switches",
+journal = "Journal of Parallel and Distributed Computing",
+volume = "69",
+number = "12",
+pages = "939 - 949",
+year = "2009",
+issn = "0743-7315",
+doi = "https://doi.org/10.1016/j.jpdc.2009.08.010",
+url = "http://www.sciencedirect.com/science/article/pii/S0743731509001579",
+author = "Deng Pan and Yuanyuan Yang",
+keywords = "Multicast, Packet scheduling, Fair scheduling, Virtual output queued (VOQ) switch, Quality of service (QoS)",
+abstract = "Multicast enables efficient data transmission from one source to multiple destinations, and has been playing an important role in Internet multimedia applications. Although several multicast scheduling schemes for packet switches have been proposed in the literature, they usually aim to achieve only short multicast latency and high throughput without considering bandwidth guarantees. However, fair bandwidth allocation is critical for the quality of service (QoS) of the network, and is necessary to support multicast applications requiring guaranteed performance services, such as online audio and video streaming. This paper addresses the issue of bandwidth guaranteed multicast scheduling on virtual output queued (VOQ) switches. We propose the Credit based Multicast Fair scheduling (CMF) algorithm, which aims at achieving not only short multicast latency but also fair bandwidth allocation. CMF uses a credit based strategy to guarantee the reserved bandwidth of an input port on each output port of the switch. It keeps track of the difference between the reserved bandwidth and actually received bandwidth, and minimizes the difference to ensure fairness. Moreover, in order to fully utilize the multicast capability provided by the switch, CMF lets a multicast packet simultaneously send transmission requests to multiple output ports. In this way, a multicast packet has more chances to be delivered to multiple destination output ports in the same time slot and thus to achieve short multicast latency. Extensive simulations are conducted to evaluate the performance of CMF, and the results demonstrate that CMF achieves the two design goals: fair bandwidth allocation and short multicast latency."
+}
+
+@ARTICLE{smiljanic, 
+author={A. {Smiljanic}}, 
+journal={IEEE/ACM Transactions on Networking}, 
+title={Flexible bandwidth allocation in high-capacity packet switches}, 
+year={2002}, 
+volume={10}, 
+number={2}, 
+pages={287-293}, 
+keywords={packet switching;bandwidth allocation;telecommunication congestion control;pipeline processing;high-capacity packet switches;bandwidth allocation;packet scheduling protocol;weighted sequential greedy scheduling;greedy algorithm;bandwidth reservation;pipeline technique;switching capacity;admission control;central controller;data networks;high bit rates;Web sessions;video streams;Channel allocation;Packet switching;Bandwidth;Switches;Protocols;Greedy algorithms;Pipelines;Submillimeter wave technology;Admission control;Centralized control}, 
+doi={10.1109/90.993308}, 
+ISSN={1063-6692}, 
+month={April},}
+
+@inproceedings{stiliadis,
+  title={Providing bandwidth guarantees in an input-buffered crossbar switch},
+  author={Stiliadis, Dimitrios and Varma, Anujan},
+  booktitle={Proceedings of INFOCOM'95},
+  volume={3},
+  pages={960--968},
+  year={1995},
+  organization={IEEE}
+}
+
+@conference{jupyter,
+	Author = {Thomas Kluyver and Benjamin Ragan-Kelley and Fernando P{\'e}rez and Brian Granger and Matthias Bussonnier and Jonathan Frederic and Kyle Kelley and Jessica Hamrick and Jason Grout and Sylvain Corlay and Paul Ivanov and Dami{\'a}n Avila and Safia Abdalla and Carol Willing},
+	Booktitle = {Positioning and Power in Academic Publishing: Players, Agents and Agendas},
+	Editor = {F. Loizides and B. Schmidt},
+	Organization = {IOS Press},
+	Pages = {87 - 90},
+	Title = {Jupyter Notebooks -- a publishing format for reproducible computational workflows},
+	Year = {2016}}
