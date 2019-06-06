@@ -11,7 +11,8 @@ class StatisticalSwitch(BaseSwitch):
                  num_output,
                  credit: np.ndarray,
                  frame_length=1000,
-                 num_iteration=1):
+                 num_iteration=1,
+                 run_pim_after=False):
         super().__init__(num_input, num_output)
         self.num_iteration = num_iteration
 
@@ -25,6 +26,7 @@ class StatisticalSwitch(BaseSwitch):
                 self.prob_matrix[input][output] = self.credit[input][output] / output_sum[output]
 
         self.X = frame_length
+        self.run_pim_after = run_pim_after
 
     def schedule(self):
         matched_inputs, matched_outputs = [], []
@@ -131,10 +133,10 @@ class StatisticalSwitch(BaseSwitch):
         for _ in range(self.num_iteration):
             run_wpim_once()
 
-        '''
-        for _ in range(self.num_iteration):
-            run_pim_once()
-        '''
+        if self.run_pim_after:
+            for _ in range(self.num_iteration):
+                run_pim_once()
+
 
         return final_decision.items()
 

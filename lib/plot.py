@@ -37,4 +37,4 @@ def draw_plot(x, y: np.ndarray, legends: List[AnyStr], ylim=None, figure_index=0
         plt.ylabel(ylabel)
 
     plt.legend(legends, loc='upper left')
-    plt.show()
+    return plt

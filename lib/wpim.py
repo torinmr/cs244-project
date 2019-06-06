@@ -11,7 +11,8 @@ class WPimSwitch(BaseSwitch):
                  num_output,
                  credit: np.ndarray,
                  frame_length,
-                 num_iteration=4):
+                 num_iteration=4,
+                 run_pim_after=False):
         super().__init__(num_input, num_output)
         self.num_iteration = num_iteration
         self.frame_length = frame_length
@@ -21,6 +22,7 @@ class WPimSwitch(BaseSwitch):
 
         self.frame_time = 0
         self.sent_credits = np.zeros(credit.shape)
+        self.run_pim_after = run_pim_after
 
     def schedule(self):
         matched_inputs, matched_outputs = [], []
@@ -97,10 +99,10 @@ class WPimSwitch(BaseSwitch):
         for _ in range(self.num_iteration):
             run_wpim_once()
 
-        '''
-        for _ in range(self.num_iteration):
-            run_pim_once()
-        '''
+        if self.run_pim_after:
+            for _ in range(self.num_iteration):
+                run_pim_once()
+
 
         self.frame_time += 1
         if self.frame_time >= self.frame_length:
